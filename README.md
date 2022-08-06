@@ -11,6 +11,11 @@ The graph will be a kind of Tri-partite graph, where one side is the domains, th
 
 A url importance is calculated by how many emails are reachable from it.
 
+## Install
+```commandline
+pip install -r requirements.txt
+```
+
 ## Run
 ```commandline
 python main.py urls.txt depth <graph.pkl> 
