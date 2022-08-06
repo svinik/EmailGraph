@@ -15,21 +15,21 @@ A url importance is calculated by how many emails are reachable from it.
 ```commandline
 python main.py urls.txt depth <graph.pkl> 
 ```
-`urls.txt` - A file with valid urls to crawl. One url per line.
+* `urls.txt` - A file with valid urls to crawl. One url per line.
 
-`depth` - the depth of the crawler search, i.e. the largest size of urls path
+* `depth` - the depth of the crawler search, i.e. the largest size of urls path
 
-`graph.pkl` - optional pickle file for the graph, if specified the graph will not be crawled
+* `graph.pkl` - optional pickle file for the graph, if specified the graph will not be crawled
 
 ## Output
-`graph.pkl` - pickle of the representation graph
+* `graph.pkl` - pickle of the representation graph
 
-`top_urls.txt` - a text file mapping each domain to its top 5 urls
+* `top_urls.txt` - a text file mapping each domain to its top 5 urls
 
 ## Limitations
 
-Due to performance issues the number of linked urls for a certain url is limited to 20.
+* Due to performance issues the number of linked urls for a certain url is limited to 20.
 
-The growth in number of urls is exponential, a higher number than 3 might take a long time.
+* The growth in number of urls is exponential, a higher number than 3 might take a long time.
 
-Some urls will cause some errors while parsing them (Forbidden, timeout, unicode) the crawler will skip such pages.
+* Some urls will cause some errors while parsing them (Forbidden, timeout, unicode) the crawler will skip such pages.
