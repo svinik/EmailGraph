@@ -11,17 +11,26 @@ if __name__ == '__main__':
     builder = EmailGraphBuilder()
     depth = int(sys.argv[2])
 
-    print("----- Start building graph -----")
-    with open(sys.argv[1]) as file:
-        for url in file:
-            builder.handle_page(url.strip(), depth=depth)
+    graph = None
+    if len(sys.argv) > 3:
+        graph_file = sys.argv[3]
+        with open(graph_file, "rb") as input_file:
+            graph = pickle.load(input_file)
 
-    with open('graph.pkl', 'wb') as handle:
-        pickle.dump(builder.graph, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    if graph is None:
+        print("----- Start building graph -----")
+        with open(sys.argv[1]) as file:
+            for url in file:
+                builder.handle_page(url.strip(), depth=depth)
 
-    print("----- Finished building graph -----")
+        print("----- Finished building graph -----")
 
-    top_pages = get_top_k_pages(k=5, graph=builder.graph)
+        graph = builder.graph
+
+        with open('graph.pkl', 'wb') as handle:
+            pickle.dump(graph, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+    top_pages = get_top_k_pages(k=5, graph=graph)
 
     with open('top_urls.txt', 'w+') as top_urls_file:
         top_urls_file.write(json.dumps(top_pages))
